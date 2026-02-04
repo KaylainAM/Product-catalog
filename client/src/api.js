@@ -1,9 +1,5 @@
 import axios from 'axios';
-
-const API = axios.create({
-  baseURL: 'http://localhost:3000/products',
-});
-
+const API = axios.create({ baseURL: 'http://localhost:3000/products' });
 export const getProducts = () => API.get('/');
 export const addProduct = (data) => API.post('/', data);
 export const updateProduct = (id, data) => API.put(`/${id}`, data);
