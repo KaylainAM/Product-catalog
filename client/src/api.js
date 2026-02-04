@@ -1,8 +1,10 @@
 import axios from 'axios';
 
-// Connects to the backend running on port 3000
 const API = axios.create({
-  baseURL: 'http://localhost:3000/products',
+  // If we are on the live site, use the Render URL. Otherwise, use localhost.
+  baseURL: window.location.hostname === 'localhost' 
+    ? 'http://localhost:3000/products' 
+    : 'https://product-catalog-yutc.onrender.com/products',
 });
 
 export const getProducts = () => API.get('/');
