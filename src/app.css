@@ -1,0 +1,306 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  background: #f5f7fa;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.app-header h1 {
+  color: #2c3e50;
+  font-size: 28px;
+}
+
+.app-main {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.products-count {
+  margin-bottom: 15px;
+  color: #7f8c8d;
+  font-weight: 500;
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.btn-primary {
+  background: #3498db;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #2980b9;
+}
+
+.btn-edit {
+  background: #f39c12;
+  color: white;
+  margin-right: 8px;
+  padding: 6px 12px;
+}
+
+.btn-edit:hover {
+  background: #e67e22;
+}
+
+.btn-delete {
+  background: #e74c3c;
+  color: white;
+  padding: 6px 12px;
+}
+
+.btn-delete:hover {
+  background: #c0392b;
+}
+
+.btn-cancel {
+  background: #95a5a6;
+  color: white;
+}
+
+.btn-cancel:hover {
+  background: #7f8c8d;
+}
+
+/* Table */
+.table-container {
+  overflow-x: auto;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.product-table thead {
+  background: #34495e;
+  color: white;
+}
+
+.product-table th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.product-table td {
+  padding: 15px;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.product-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.title-cell {
+  max-width: 300px;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.price-cell {
+  font-weight: 600;
+  color: #27ae60;
+  font-size: 16px;
+}
+
+.category-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #3498db;
+  color: white;
+  border-radius: 12px;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.actions-cell {
+  white-space: nowrap;
+}
+
+.no-products {
+  text-align: center;
+  padding: 40px !important;
+  color: #95a5a6;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+/* Form */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ecf0f1;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.form-actions .btn {
+  flex: 1;
+}
+
+/* Delete Modal */
+.delete-modal {
+  max-width: 400px;
+}
+
+.delete-modal p {
+  margin: 10px 0;
+  color: #555;
+}
+
+.delete-modal .warning {
+  color: #e74c3c;
+  font-weight: 500;
+}
+
+/* Loading & Error */
+.loading {
+  text-align: center;
+  padding: 60px;
+  color: #7f8c8d;
+  font-size: 18px;
+}
+
+.error-message {
+  background: #fee;
+  border: 1px solid #fcc;
+  padding: 20px;
+  border-radius: 6px;
+  color: #c33;
+  text-align: center;
+}
+
+.error-message button {
+  margin-top: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app {
+    padding: 10px;
+  }
+
+  .app-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .app-header h1 {
+    font-size: 22px;
+  }
+
+  .product-table th,
+  .product-table td {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .title-cell {
+    max-width: 150px;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}
