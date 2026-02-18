@@ -1,34 +1,36 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/products';
-
+const API = axios.create({
+  baseURL: 'https://product-catalog-yutc.onrender.com' 
+});
 export const productAPI = {
   // Get all products
   getAllProducts: async () => {
-    const response = await axios.get(API_URL);
+    const response = await API.get('/products');
     return response.data;
   },
 
   // Get single product
   getProduct: async (id) => {
-    const response = await axios.get(`${API_URL}/${id}`);
+    const response = await API.get(`/products/${id}`);
     return response.data;
   },
 
   // Create new product
   createProduct: async (product) => {
-    const response = await axios.post(API_URL, product);
+    const response = await API.post('/products', product);
     return response.data;
   },
 
   // Update product
   updateProduct: async (id, product) => {
-    const response = await axios.put(`${API_URL}/${id}`, product);
+    const response = await API.put(`/products/${id}`, product);
     return response.data;
   },
 
+
   // Delete product
   deleteProduct: async (id) => {
-    await axios.delete(`${API_URL}/${id}`);
+    await API.delete(`/products/${id}`);
   }
 };
