@@ -116,6 +116,20 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
               {product ? 'Update' : 'Create'} Product
             </button>
           </div>
+          // Add this inside the form, after the Image URL input:
+
+{formData.image && (
+  <div className="image-preview">
+    <p>Image Preview:</p>
+    <img 
+      src={formData.image} 
+      alt="Preview"
+      onError={(e) => {
+        e.target.style.display = 'none';
+      }}
+    />
+  </div>
+)}
         </form>
       </div>
     </div>
