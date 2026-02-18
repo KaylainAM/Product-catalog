@@ -2,65 +2,80 @@ import React from 'react';
 
 const ProductTable = ({ products, onEdit, onDelete }) => {
   return (
-    <div className="table-container">
-      <table className="product-table">
-        <thead>
-          <tr>
-            <th>Image</th>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.length === 0 ? (
-            <tr>
-              <td colSpan="6" className="no-products">No products found</td>
-            </tr>
-          ) : (
-            products.map((product) => (
-              <tr key={product.id}>
-                <td className="image-cell">
-                  {product.image ? (
-                    <img 
-                      src={product.image} 
-                      alt={product.title}
-                      className="product-image"
-                      onError={(e) => {
-                        e.target.src = 'https://via.placeholder.com/60x60?text=No+Image';
-                      }}
-                    />
-                  ) : (
-                    <div className="no-image">No Image</div>
-                  )}
-                </td>
-                <td>{product.id}</td>
-                <td className="title-cell">{product.title}</td>
-                <td>
-                  <span className="category-badge">{product.category}</span>
-                </td>
-                <td className="price-cell">${product.price.toFixed(2)}</td>
-                <td className="actions-cell">
+    <div className="products-grid">
+      {products.length === 0 ? (
+        <div className="no-products-message">
+          <p>No products found</p>
+          <p className="subtitle">Click "Add Product" to get started</p>
+        </div>
+      ) : (
+        products.map((product) => (
+          <div key={product.id} className="product-card">
+            <div className="product-image-container">
+              {product.image ? (
+                <img 
+                  src={product.image} 
+                  alt={product.title}
+                  className="product-card-image"
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/300x300?text=No+Image';
+                  }}
+                />
+              ) : (
+                <div className="product-no-image">
+                  <span>No Image</span>
+                </div>
+              )}
+              <span className="product-category-badge">{product.category}</span>
+            </div>
+            
+            <div className="product-card-content">
+              <h3 className="product-title">{product.title}</h3>
+              
+              <div className="product-details">
+                {product.rating && (
+                  <div className="product-rating">
+                    <span className="stars">⭐ {product.rating.rate.toFixed(1)}</span>
+                    <span className="review-count">({product.rating.count} reviews)</span>
+                  </div>
+                )}
+                
+                {product.description && (
+                  <p className="product-description">
+                    {product.description.length > 80 
+                      ? `${product.description.substring(0, 80)}...` 
+                      : product.description}
+                  </p>
+                )}
+              </div>
+              
+              <div className="product-footer">
+                <div className="product-price-section">
+                  <span className="product-price">${product.price.toFixed(2)}</span>
+                  <span className="product-id">ID: {product.id}</span>
+                </div>
+                
+                <div className="product-actions">
                   <button 
                     className="btn btn-edit"
                     onClick={() => onEdit(product)}
+                    title="Edit Product"
                   >
-                    Edit
+                    ✏️ Edit
                   </button>
                   <button 
                     className="btn btn-delete"
                     onClick={() => onDelete(product)}
+                    title="Delete Product"
                   >
-                    Delete
+                    🗑️ Delete
                   </button>
-                </td>
-              </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      )}
     </div>
   );
 };
