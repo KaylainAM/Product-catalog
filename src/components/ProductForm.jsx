@@ -16,28 +16,30 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
     }
   }, [product]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
   const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    const productData = {
-      ...formData,
-      price: parseFloat(formData.price),
-      rating: {
-        rate: parseFloat(formData.rating?.rate || 0),
-        count: parseInt(formData.rating?.count || 0)
-      }
-    };
+  e.preventDefault();
 
-    onSubmit(productData);
+  // Create a helper to wrap the URL in the proxy
+  const proxyUrl = (url) => {
+    if (!url) return "https://placehold.co/400?text=No+Image";
+    // Only proxy if it's a fakestoreapi link; leave other links alone
+    return url.includes('fakestoreapi.com') 
+      ? `https://wsrv.nl/?url=${url}` 
+      : url;
   };
+
+  const productData = {
+    ...formData,
+    image: proxyUrl(formData.image), // Automatically wrap the URL
+    price: parseInt(formData.price),
+    rating: {
+      rate: parseFloat(formData.rating?.rate || 0),
+      count: parseInt(formData.rating?.count || 0)
+    }
+  };
+
+  onSubmit(productData);
+};
 
   return (
     <div className="modal-overlay">
