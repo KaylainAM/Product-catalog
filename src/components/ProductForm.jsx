@@ -16,30 +16,33 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
     }
   }, [product]);
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
   const handleSubmit = (e) => {
-  e.preventDefault();
+    e.preventDefault();
+    
+    // Prepare data in correct format
+    const productData = {
+      title: formData.title,
+      price: parseFloat(formData.price),
+      description: formData.description,
+      category: formData.category,
+      image: formData.image,
+      rating: {
+        rate: parseFloat(formData.rating?.rate || 0),
+        count: parseInt(formData.rating?.count || 0)
+      }
+    };
 
-  // Create a helper to wrap the URL in the proxy
-  const proxyUrl = (url) => {
-    if (!url) return "https://placehold.co/400?text=No+Image";
-    // Only proxy if it's a fakestoreapi link; leave other links alone
-    return url.includes('fakestoreapi.com') 
-      ? `https://wsrv.nl/?url=${url}` 
-      : url;
+    console.log('Submitting product:', productData); // DEBUG
+    onSubmit(productData);
   };
-
-  const productData = {
-    ...formData,
-    image: proxyUrl(formData.image), // Automatically wrap the URL
-    price: parseInt(formData.price),
-    rating: {
-      rate: parseFloat(formData.rating?.rate || 0),
-      count: parseInt(formData.rating?.count || 0)
-    }
-  };
-
-  onSubmit(productData);
-};
 
   return (
     <div className="modal-overlay">
@@ -107,6 +110,7 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
               name="image"
               value={formData.image}
               onChange={handleChange}
+              placeholder="https://example.com/image.jpg"
             />
           </div>
 
@@ -118,20 +122,6 @@ const ProductForm = ({ product, onSubmit, onCancel }) => {
               {product ? 'Update' : 'Create'} Product
             </button>
           </div>
-          // Add this inside the form, after the Image URL input:
-
-{formData.image && (
-  <div className="image-preview">
-    <p>Image Preview:</p>
-    <img 
-      src={formData.image} 
-      alt="Preview"
-      onError={(e) => {
-        e.target.style.display = 'none';
-      }}
-    />
-  </div>
-)}
         </form>
       </div>
     </div>
