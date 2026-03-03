@@ -22,3 +22,4 @@ const handleSubmit = async (productData) => {
     alert('Failed to save product: ' + err.message);
   }
 };
+export default App;
