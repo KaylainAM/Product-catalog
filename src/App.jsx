@@ -79,89 +79,61 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white font-sans selection:bg-blue-500/30">
       {/* Header */}
-      <header className="bg-white shadow-lg sticky top-0 z-10 border-b-2 border-indigo-100">
+      <header className="bg-gray-900/50 backdrop-blur-md sticky top-0 z-10 border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-4xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <h1 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
                 Product Catalog
               </h1>
-              <p className="text-sm text-gray-500 mt-1">Manage your inventory efficiently</p>
+              <p className="text-sm text-gray-400 mt-1">ALU BSE Inventory System</p>
             </div>
             <button 
               onClick={handleCreate}
-              className="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 flex items-center gap-2"
+              className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl shadow-lg shadow-blue-500/20 transform hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-2"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-              </svg>
-              Add Product
+              <span className="text-xl">+</span> Add Product
             </button>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in">
         {/* Loading State */}
         {loading && (
           <div className="flex flex-col justify-center items-center py-20">
-            <div className="relative">
-              <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-indigo-500"></div>
-              <div className="absolute top-0 left-0 animate-ping rounded-full h-16 w-16 border-4 border-purple-400 opacity-20"></div>
-            </div>
-            <p className="mt-4 text-gray-600 font-medium">Loading products...</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+            <p className="mt-4 text-gray-400">Syncing with backend...</p>
           </div>
         )}
         
         {/* Error State */}
         {error && (
-          <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg shadow-md animate-shake">
-            <div className="flex items-start">
-              <div className="flex-shrink-0">
-                <svg className="h-6 w-6 text-red-400" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div className="ml-3 flex-1">
-                <p className="text-sm font-semibold text-red-800">{error}</p>
-              </div>
-              <button 
-                onClick={fetchProducts}
-                className="ml-4 px-4 py-2 bg-red-500 text-white text-sm font-semibold rounded-md hover:bg-red-600 transition-colors shadow-sm"
-              >
-                Retry
-              </button>
-            </div>
+          <div className="bg-red-900/20 border border-red-500/50 p-6 rounded-2xl text-center">
+            <p className="text-red-400 font-medium mb-4">{error}</p>
+            <button onClick={fetchProducts} className="px-4 py-2 bg-red-600 rounded-lg text-sm font-bold">Retry Connection</button>
           </div>
         )}
 
-        {/* Products Display */}
+        {/* Display */}
         {!loading && !error && (
-          <div className="space-y-6">
+          <div className="space-y-8">
             {/* Stats Card */}
-            <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-500 uppercase tracking-wide">Total Products</p>
-                  <p className="text-4xl font-bold text-indigo-600 mt-2">{products.length}</p>
-                </div>
-                <div className="bg-indigo-100 rounded-full p-4">
-                  <svg className="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                  </svg>
-                </div>
-              </div>
+            <div className="bg-gray-800/30 backdrop-blur-md rounded-2xl p-6 border border-gray-700/50 inline-block min-w-[240px]">
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-[0.2em]">Total Inventory</p>
+              <p className="text-5xl font-black text-white mt-2 italic">{products.length}<span className="text-blue-500 text-xl ml-1">items</span></p>
             </div>
 
-            {/* Product Table */}
-            <ProductTable
-              products={products}
-              onEdit={handleEdit}
-              onDelete={handleDeleteClick}
-            />
+            {/* Table Container */}
+            <div className="bg-gray-900/80 backdrop-blur-xl rounded-2xl border border-gray-800 shadow-2xl overflow-hidden">
+              <ProductTable
+                products={products}
+                onEdit={handleEdit}
+                onDelete={handleDeleteClick}
+              />
+            </div>
           </div>
         )}
       </main>
